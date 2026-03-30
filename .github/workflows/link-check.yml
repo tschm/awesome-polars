@@ -25,5 +25,39 @@ jobs:
           args: >-
             --no-progress
             --accept 200,206,403,429
+            --format json
+            --output /tmp/lychee.json
             README.md
-          fail: true
+          fail: false
+
+      - name: Report broken links with line numbers
+        run: |
+          python3 - <<'PYEOF'
+          import json, re, sys
+
+          try:
+              with open('/tmp/lychee.json') as f:
+                  data = json.load(f)
+          except (FileNotFoundError, json.JSONDecodeError) as e:
+              print(f"Could not read lychee output: {e}")
+              sys.exit(1)
+
+          fail_map = data.get('fail_map', {})
+          if not fail_map:
+              print("All links are valid!")
+              sys.exit(0)
+
+          with open('README.md') as f:
+              lines = f.readlines()
+
+          for _, link_list in fail_map.items():
+              for link_info in link_list:
+                  url = link_info.get('url', '')
+                  status = link_info.get('status', '')
+                  pattern = re.compile(re.escape(url) + r'(?![A-Za-z0-9\-._~:/?#@!$&=%;,+])')
+                  line_nums = [i + 1 for i, line in enumerate(lines) if pattern.search(line)]
+                  loc = ', '.join(f'line {n}' for n in line_nums) if line_nums else 'line unknown'
+                  print(f"[{loc}] {url} ({status})")
+
+          sys.exit(1)
+          PYEOF
