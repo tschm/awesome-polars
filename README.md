@@ -1,6 +1,6 @@
 <div align="center">
 
-![Last commit date](https://img.shields.io/github/last-commit/ddotta/awesome-polars?style=flat&label=last%20commit) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re) [![Track Awesome List](https://www.trackawesomelist.com/badge.svg)](https://www.trackawesomelist.com/ddotta/awesome-polars/)  
+![Last commit date](https://img.shields.io/github/last-commit/ddotta/awesome-polars?style=flat&label=last%20commit) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re) [![Track Awesome List](https://www.trackawesomelist.com/badge.svg)](https://www.trackawesomelist.com/ddotta/awesome-polars/) [![Check Links](https://github.com/tschm/awesome-polars/actions/workflows/link-check.yml/badge.svg)](https://github.com/tschm/awesome-polars/actions/workflows/link-check.yml)  
 
 *A curated list of [Polars](https://www.pola.rs/) docs, talks, tools, examples & articles the internet has to offer.*  
 
