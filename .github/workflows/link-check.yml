@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 jobs:
   link-check:
@@ -22,6 +23,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Check links in README.md
+        id: lychee
         uses: lycheeverse/lychee-action@v2
         with:
           args: >-
@@ -35,7 +37,7 @@ jobs:
       - name: Report broken links with line numbers
         run: |
           python3 - <<'PYEOF'
-          import json, re, sys
+          import json, os, re, sys
 
           try:
               with open('/tmp/lychee.json') as f:
@@ -52,6 +54,8 @@ jobs:
           with open('README.md') as f:
               lines = f.readlines()
 
+          md_lines = ["# Link Checker Report\n\n", "The following links are broken:\n\n"]
+
           for _, link_list in fail_map.items():
               for link_info in link_list:
                   url = link_info.get('url', '')
@@ -60,6 +64,19 @@ jobs:
                   line_nums = [i + 1 for i, line in enumerate(lines) if pattern.search(line)]
                   loc = ', '.join(f'line {n}' for n in line_nums) if line_nums else 'line unknown'
                   print(f"[{loc}] {url} ({status})")
+                  md_lines.append(f"- [{loc}] {url} ({status})\n")
+
+          os.makedirs('lychee', exist_ok=True)
+          with open('lychee/out.md', 'w') as f:
+              f.writelines(md_lines)
 
           sys.exit(1)
           PYEOF
+
+      - name: Create Issue From File
+        if: steps.lychee.outputs.exit_code != 0
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: Link Checker Report
+          content-filepath: ./lychee/out.md
+          labels: report, automated issue
