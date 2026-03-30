@@ -29,9 +29,7 @@ jobs:
           args: >-
             --no-progress
             --accept 200,206,403,429
-            --format json
             README.md
-          output: /tmp/lychee.json
           fail: false
 
       - name: Create Issue From File
