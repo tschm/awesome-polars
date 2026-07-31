@@ -24,7 +24,7 @@ jobs:
         with:
           args: >-
             --no-progress
-            --accept 200,206,403,429
+            --accept 200,202,206,403,429
             --insecure
             --max-concurrency 16
             --max-retries 5
