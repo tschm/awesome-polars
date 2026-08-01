@@ -8,6 +8,13 @@ on:
       - media/**
       - .github/scripts/build_docs.py
       - .github/workflows/pages.yml
+  pull_request:
+    # Duplicated: the Actions workflow parser does not expand YAML anchors.
+    paths:
+      - README.md
+      - media/**
+      - .github/scripts/build_docs.py
+      - .github/workflows/pages.yml
   workflow_dispatch:
 
 permissions:
@@ -16,8 +23,10 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  # Per ref, so a pull request build never queues behind a deploy. Superseded
+  # pull request builds are pointless; superseded deploys are not.
+  group: pages-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
@@ -39,15 +48,24 @@ jobs:
       - name: Build site
         run: mkdocs build --strict
 
+      # A pull request only needs to prove the site still builds. Publishing
+      # steps need write access the token does not carry on fork pull requests.
       - uses: actions/configure-pages@v5
+        if: github.event_name != 'pull_request'
 
       - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
         with:
           path: site
 
   deploy:
     needs: build
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
+    concurrency:
+      # One deploy at a time, and never cancel one in flight.
+      group: pages
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
