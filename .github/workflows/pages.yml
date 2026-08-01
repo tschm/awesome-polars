@@ -6,6 +6,7 @@ on:
     paths:
       - README.md
       - media/**
+      - mkdocs.yml
       - .github/scripts/build_docs.py
       - .github/workflows/pages.yml
   pull_request:
@@ -13,6 +14,7 @@ on:
     paths:
       - README.md
       - media/**
+      - mkdocs.yml
       - .github/scripts/build_docs.py
       - .github/workflows/pages.yml
   workflow_dispatch:
@@ -46,6 +48,12 @@ jobs:
         run: python .github/scripts/build_docs.py
 
       - name: Build site
+        # mkdocs.yml reads these via !ENV, falling back to the upstream
+        # repository when they are unset (a local `mkdocs serve`).
+        env:
+          SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+          REPO_NAME: ${{ github.repository }}
         run: mkdocs build --strict
 
       # A pull request only needs to prove the site still builds. Publishing
