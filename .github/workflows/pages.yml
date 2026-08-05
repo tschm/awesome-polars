@@ -1,0 +1,82 @@
+name: Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - README.md
+      - media/**
+      - mkdocs.yml
+      - .github/scripts/build_docs.py
+      - .github/workflows/pages.yml
+  pull_request:
+    # Duplicated: the Actions workflow parser does not expand YAML anchors.
+    paths:
+      - README.md
+      - media/**
+      - mkdocs.yml
+      - .github/scripts/build_docs.py
+      - .github/workflows/pages.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  # Per ref, so a pull request build never queues behind a deploy. Superseded
+  # pull request builds are pointless; superseded deploys are not.
+  group: pages-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install mkdocs-material
+        # mkdocs 2.0 drops the plugin system material relies on, so stay on 1.x.
+        run: pip install --disable-pip-version-check "mkdocs-material~=9.7" "mkdocs<2"
+
+      - name: Generate docs from README.md
+        run: python .github/scripts/build_docs.py
+
+      - name: Build site
+        # mkdocs.yml reads these via !ENV, falling back to the upstream
+        # repository when they are unset (a local `mkdocs serve`).
+        env:
+          SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+          REPO_NAME: ${{ github.repository }}
+        run: mkdocs build --strict
+
+      # A pull request only needs to prove the site still builds. Publishing
+      # steps need write access the token does not carry on fork pull requests.
+      - uses: actions/configure-pages@v6
+        if: github.event_name != 'pull_request'
+
+      - uses: actions/upload-pages-artifact@v5
+        if: github.event_name != 'pull_request'
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    concurrency:
+      # One deploy at a time, and never cancel one in flight.
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

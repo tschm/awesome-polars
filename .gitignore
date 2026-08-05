@@ -4,3 +4,8 @@
 .Ruserdata
 *.Rproj
 *.html
+
+# Generated on the fly by .github/scripts/build_docs.py — never committed.
+# mkdocs.yml is hand-maintained and *is* committed.
+/docs/
+/site/

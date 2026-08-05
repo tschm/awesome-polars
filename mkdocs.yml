@@ -1,0 +1,71 @@
+# The site is built from README.md: `.github/scripts/build_docs.py` renders it
+# into docs/index.md, which is generated and gitignored. This file is not —
+# edit the theme here.
+#
+# The three repo-dependent values default to the upstream repository and are
+# overridden by the Pages workflow, so forks deploy with their own URLs.
+site_name: Awesome Polars
+site_description: >-
+  A curated list of Polars docs, talks, tools, examples & articles
+  the internet has to offer.
+site_url: !ENV [SITE_URL, "https://ddotta.github.io/awesome-polars/"]
+repo_url: !ENV [REPO_URL, "https://github.com/ddotta/awesome-polars"]
+repo_name: !ENV [REPO_NAME, "ddotta/awesome-polars"]
+# Every page comes from README.md, so pin the edit link instead of letting
+# MkDocs append the (generated) page path.
+edit_uri_template: edit/main/README.md
+copyright: Released under the CC BY 4.0 licence
+
+theme:
+  name: material
+  logo: media/logo_awesome_polars.png
+  favicon: media/logo_awesome_polars.png
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - content.action.edit
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.suggest
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: amber
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: amber
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+markdown_extensions:
+  # md_in_html lets the README's centred <div> wrappers keep their content.
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+      toc_depth: 3
+
+plugins:
+  - search
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: !ENV [REPO_URL, "https://github.com/ddotta/awesome-polars"]
+      name: Awesome Polars on GitHub
+    - icon: fontawesome/solid/bolt
+      link: https://pola.rs/
+      name: Polars
+
+validation:
+  links:
+    anchors: warn
+    unrecognized_links: warn
