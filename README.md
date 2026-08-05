@@ -2,12 +2,12 @@
 
 ![Last commit date](https://img.shields.io/github/last-commit/ddotta/awesome-polars?style=flat&label=last%20commit) [![Check Links](https://github.com/ddotta/awesome-polars/actions/workflows/link-check.yml/badge.svg)](https://github.com/ddotta/awesome-polars/actions/workflows/link-check.yml) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re) [![Track Awesome List](https://www.trackawesomelist.com/badge.svg)](https://www.trackawesomelist.com/ddotta/awesome-polars/)
 
-*A curated list of [Polars](https://www.pola.rs/) docs, talks, tools, examples & articles the internet has to offer.*
+*A curated list of [Polars](https://pola.rs/) docs, talks, tools, examples & articles the internet has to offer.*
 
-[Polars](https://www.pola.rs/) is a lightning-fast DataFrame library for Rust, Python, Node.js and R.
+[Polars](https://pola.rs/) is a lightning-fast DataFrame library for Rust, Python, Node.js and R.
 Implemented in Rust, Polars uses [Apache Arrow Columnar Format](https://arrow.apache.org/docs/format/Columnar.html) as the memory model.
 
-<a href="https://www.pola.rs/" target="_blank" rel="noopener noreferrer">
+<a href="https://pola.rs/" target="_blank" rel="noopener noreferrer">
   <img src="media/logo_awesome_polars.png" alt-text="Polars's logo."/>
 </a>
 
@@ -71,7 +71,7 @@ To see the latest entries in the list, <a href="https://www.trackawesomelist.com
 
 - **September 2025** : [Polars raises €18M Series A](https://pola.rs/posts/series_a/) to build fast, ergonomic data processing at any scale.
 - **September 2025** : Polars launches [Polars Cloud and a Distributed Engine in Open Beta](https://pola.rs/posts/polars-cloud-launch/).
-- **August 2023** : Polars announces that it [has raised a a $4M seed round](https://www.pola.rs/posts/company-announcement/)!
+- **August 2023** : Polars announces that it [has raised a a $4M seed round](https://pola.rs/posts/company-announcement/)!
 - **July 2024** : Python Polars 1.0 release ! See this [blog post special announcement](https://pola.rs/posts/announcing-polars-1/).
 - **September 2024** : Polars has a [new lightweight plotting backend](https://pola.rs/posts/lightweight_plotting/).
 - **September 2024** : [GPU acceleration with Polars and NVIDIA RAPIDS](https://pola.rs/posts/gpu-engine-release/).
@@ -86,7 +86,7 @@ To see the latest entries in the list, <a href="https://www.trackawesomelist.com
 - [Shared library plugins for Polars](https://github.com/pola-rs/pyo3-polars).
 - [Documentation for R API](https://pola-rs.github.io/r-polars/) - Official API Reference for R.
 - [Github: Polars Github Organization](https://github.com/pola-rs) - Official Polars Github repository.
-- [Blog posts from Polars](https://www.pola.rs/posts/) - Official blogs posts from Polars.
+- [Blog posts from Polars](https://pola.rs/posts/) - Official blogs posts from Polars.
 - [Keynote on Polars at EuroSciPy 2023](https://www.youtube.com/watch?v=GTVm3QyJ-3I&t=43s) &#9203; `57 min` - Talk by [\@ritchie46](https://github.com/ritchie46) that dives into Polars and sees what makes it so efficient.  It will touch on technologies like Arrow, Rust, parallelism, data structures, query optimization and more.
 - [Talk about Polars at EuroPython Conference 2023](https://www.youtube.com/watch?v=UwRlFtSd_-8) &#9203; `28 min` - Talk by [\@ritchie46](https://github.com/ritchie46) that introduces Polars and some of its design decisions.
 
