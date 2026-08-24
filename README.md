@@ -208,6 +208,7 @@ You can also try to [Polars plugins Cookiecutter](https://github.com/MarcoGorell
 
 #### Statistics / Analytics
 - [polars_kde](https://github.com/schemaitat/polars_kde) - Polars plugin for kernel density estimation by @schemaitat.
+- [polarscope](https://github.com/pytoned/polarscope) - Polars plugin for quick data summary, cleaning and visualization of Polars dataframes by @pytoned.  
 
 #### Visualization
 - [seaborn_polars](https://github.com/pavelcherepan/seaborn_polars) - Python package to plot Polars DataFrames and LazyFrames with [seaborn](https://seaborn.pydata.org/) by [@pavelcherepan](https://github.com/pavelcherepan).
