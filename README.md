@@ -57,6 +57,7 @@ To see the latest entries in the list, <a href="https://www.trackawesomelist.com
     - [Node.js](#nodejs)
     - [Scala/Java](#scalajava)
     - [Ruby](#ruby)
+    - [.NET](#net)
   - [Tools Built with Polars](#tools-built-with-polars)
   - [Resources](#resources)
     - [Cheat Sheets](#cheat-sheets)
@@ -293,7 +294,8 @@ You can also try to [Polars plugins Cookiecutter](https://github.com/MarcoGorell
 ### Cheat Sheets
 
 - [Polars Cheat Sheet](https://franzdiebold.github.io/polars-cheat-sheet/Polars_cheat_sheet.pdf) - A Polars Cheat Sheet by [@FranzDiebold](https://github.com/FranzDiebold).
-- [Cheatsheet for Pandas to Polars](https://www.rhosignal.com/posts/polars-pandas-cheatsheet/) - A Cheat Sheet that shows how to convert some familiar Pandas commands to Polars by [@braaannigan](https://github.com/braaannigan).
+- [Cheatsheet for Pandas to Polars](https://www.rhosignal.com/posts/polars-pandas-cheatsheet/) - A Cheat Sheet that shows how to convert some familiar Pandas commands to Polars by [@braaannigan](https://github.com/braaannigan).  
+- [Python Polars: The Definitive Cheatsheet ](https://opensource.posit.co/resources/cheatsheets/polars/) - Quick reference guide for transforming, analyzing, and visualizing data with Python Polars by [posit open source](https://opensource.posit.co/).  
 
 ### Books
 
